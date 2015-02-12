@@ -3,21 +3,22 @@ require 'grape'
 require 'json'
 
 class SentimentApiV1 < Grape::API
-    version 'v1', :using => :path, :vendor => '3scale'
+    version '1', :using => :header, :vendor => '3scale' #hackish
+    format :json
 
     resource :words do
         get ':word' do
-            {word: params[:word], sentiment:"unknown"}.to_json
+            {word: params[:word], sentiment:"unknown"}
         end
 
         post ':word' do
-            {word: params[:word], result: "thinking"}.to_json
+            {word: params[:word], result: "thinking"}
         end
     end
 
     resource :sentences do
         get ':sentence' do
-            {sentence: params[:sentence], result:"unknown"}.to_json
+            {sentence: params[:sentence], result:"unknown"}
         end
     end
 end
